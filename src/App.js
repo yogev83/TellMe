@@ -6,11 +6,12 @@ import { getQueryParam, setQueryParams } from "./utils";
 import "./styles.css";
 import { UserAccountPage } from "./pages/userAccount/userAcountPage";
 import { UserContext } from "./context/userContext";
+import { DbContext } from "./context/bdContext";
 import { fetchSessionData } from "./service";
 //import userEvent from "@testing-library/user-event";
 import { MyAccount } from "./pages/myAccount/myAccountPage";
 
-export default function App() {
+export default function App({ db }) {
   const [filter, setFilter] = React.useState([]);
   const onFilterChange = React.useCallback(
     (e) => {
@@ -62,13 +63,15 @@ export default function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Header
-        onFilterChange={onFilterChange}
-        openSignIn={openSignIn}
-        openMyAccount={openMyAccount}
-      />
-      {pageElement}
-    </UserContext.Provider>
+    <DbContext.Provider value={db}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Header
+          onFilterChange={onFilterChange}
+          openSignIn={openSignIn}
+          openMyAccount={openMyAccount}
+        />
+        {pageElement}
+      </UserContext.Provider>
+    </DbContext.Provider>
   );
 }

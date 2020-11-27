@@ -5,7 +5,7 @@ import {
   userLectures,
 } from "./mockServer";
 
-// import axios from "axios";
+//import axios from "axios";
 
 const SERVER_URL = "https://tellme-60d3c.firebaseio.com/";
 
@@ -85,5 +85,5 @@ const postAPI = async (path, params) => {
   //     // handle error
   //     console.log(error);
   //   });
-  // return data;
+  return data;
 };

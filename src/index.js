@@ -25,24 +25,17 @@ const firebaseConfig = {
   storageBucket: "tellme-c389b.appspot.com",
   messagingSenderId: "528300095691",
   appId: "1:528300095691:web:a524b58b1342cfcee8434e",
-  measurementId: "G-HM83TXTVLV"
+  measurementId: "G-HM83TXTVLV",
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 let db = firebase.firestore();
-db.collection("lectures")
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().name}`);
-    });
-  });
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App db={db} />
   </React.StrictMode>,
   rootElement
 );
