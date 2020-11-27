@@ -1,6 +1,5 @@
 import React from "react";
 import { DbContext } from "../../../context/bdContext";
-import { fetchLectures } from "../../../service";
 import { Lecture } from "./lecture";
 import "./lectures.css";
 
