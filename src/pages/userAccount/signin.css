@@ -1,0 +1,26 @@
+.page-signin {
+  padding: 10% 20%;
+}
+
+.page-signin .signinContainer {
+  padding: 10em;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.page-signin .signinContainer input {
+  margin-left: 5em;
+}
+
+.page-signin .signinContainer button.signInBtn {
+  float: right;
+  margin: 5em;
+  cursor: pointer;
+}
+
+.page-signin .signinContainer .notRegistered,
+.page-signin .signinContainer .hasAccount,
+.page-signin .signinContainer .forgotPassword {
+  font-style: oblique;
+  color: rgb(43, 43, 161);
+}

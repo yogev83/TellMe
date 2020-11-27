@@ -1,0 +1,37 @@
+.lectureContent {
+  padding: 30px;
+  width: 75%;
+}
+
+.speaker {
+  margin: 30px;
+}
+
+.speaker .speakerheader {
+  color: #555;
+}
+
+.speaker .speakerImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: contain;
+  display: inline-block;
+}
+
+.speaker span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.speaker .speakerRating {
+  margin-bottom: 10px;
+}
+
+.rating > span::before {
+  position: absolute;
+}
+
+.rating > span.checked::before {
+  content: "\2605";
+}

@@ -1,0 +1,15 @@
+.myAccount-page {
+  padding: 10px 30px;
+}
+
+.myAccount-page .myAcountTabs {
+  background: white;
+}
+
+.myAccount-page span.lectureDetails {
+  display: flex;
+}
+
+.myAccount-page span.lectureDetails > p {
+  margin-left: 1em;
+}
