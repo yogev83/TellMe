@@ -7,9 +7,9 @@ import "./header.css";
 
 export function Header({ isSignedIn, onFilterChange }) {
   const history = useHistory();
-  const match = useRouteMatch();
+  // const match = useRouteMatch();
 
-  console.warn(match);
+  //console.warn(match);
 
   return (
     <div className="header">
@@ -21,7 +21,7 @@ export function Header({ isSignedIn, onFilterChange }) {
       >
         TellMe
       </h1>
-      {match === "/" ? (
+      {"" === "/" ? (
         <div>
           What can we tell you about?
           <input className="searchLecture" onChange={onFilterChange} />

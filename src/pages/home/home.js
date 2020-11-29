@@ -4,9 +4,9 @@ import { Lectures } from "./lectures/lectures";
 import "./home.css";
 
 export function Home({ filter, openLecture }) {
-  const bannerTitle = "Some Title about The Project";
+  const bannerTitle = "All You Want to Hear, and Say";
   const bannerContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus egestas dui eu tortor viverra auctor";
+    "TellMe let's you choose what you want to hear, from whom you want to hear it, or - even be heared yourself";
   return (
     <div className="page page-home">
       <Banner title={bannerTitle} content={bannerContent} image="banner.jpg" />

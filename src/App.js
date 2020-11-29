@@ -5,7 +5,7 @@ import { AuthPage } from "./pages/auth/authPage";
 //import userEvent from "@testing-library/user-event";
 import { MyAccount } from "./pages/myAccount/myAccountPage";
 
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -38,7 +38,7 @@ export default function App({ db }) {
         openMyAccount={() => {}}
       />
 
-      <div>
+      <BrowserRouter>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
@@ -49,7 +49,7 @@ export default function App({ db }) {
             <Home filter={filter} openLecture={openLecture} />;
           </Route>
         </Switch>
-      </div>
+      </BrowserRouter>
     </>
   );
 }
