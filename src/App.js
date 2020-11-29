@@ -4,74 +4,67 @@ import { LecturePage } from "./pages/lecture/lecturePage";
 import { Lobby } from "./pages/lobby/lobby";
 import { getQueryParam, setQueryParams } from "./utils";
 import "./styles.css";
-import { UserAccountPage } from "./pages/userAccount/userAcountPage";
-import { UserContext } from "./context/userContext";
-import { DbContext } from "./context/bdContext";
+import { AuthPage } from "./pages/auth/authPage";
 import { fetchSessionData } from "./service";
 //import userEvent from "@testing-library/user-event";
 import { MyAccount } from "./pages/myAccount/myAccountPage";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default function App({ db }) {
   const [filter, setFilter] = React.useState([]);
-  const onFilterChange = React.useCallback(
-    (e) => {
-      const values = e.target.value.split(",");
-      setFilter(values.map((s) => s.trim()));
-    },
-    [setFilter]
-  );
-
-  const [user, setUser] = React.useState({});
+  const [isSignedIn, setIsSignedIn] = React.useState(false);
+  // const onFilterChange = React.useCallback(
+  //   (e) => {
+  //     const values = e.target.value.split(",");
+  //     setFilter(values.map((s) => s.trim()));
+  //   },
+  //   [setFilter]
+  // );
 
   const openLecture = (id) => {
-    setQueryParams({ page: "lecture", lecture: id });
+    //setQueryParams({ page: "lecture", lecture: id });
   };
 
-  const openSignIn = () => {
-    setQueryParams({ page: "signIn" });
-  };
-
-  const openMyAccount = () => {
-    setQueryParams({ page: "myAccount" });
-  };
-
-  const pageElement = React.useMemo(() => {
-    const page = getQueryParam("page");
-    switch (page) {
-      case "lobby":
-        return <Lobby filter={filter} openLecture={openLecture} />;
-      case "lecture":
-        return <LecturePage id={getQueryParam("id")} />;
-      case "signIn":
-        return <UserAccountPage></UserAccountPage>;
-      case "myAccount":
-        return <MyAccount></MyAccount>;
-      default:
-        return <Lobby filter={filter} openLecture={openLecture} />;
-    }
-  }, [filter]);
-
-  React.useEffect(() => {
-    const callFetchSessionData = async () => {
-      const token = sessionStorage.getItem("token");
-      if (token) {
-        let data = await fetchSessionData(token);
-        setUser(data.user);
-      }
-    };
-    callFetchSessionData();
-  }, []);
+  firebase.auth().onAuthStateChanged((user) => setIsSignedIn(!!user));
 
   return (
-    <DbContext.Provider value={db}>
-      <UserContext.Provider value={{ user, setUser }}>
-        <Header
-          onFilterChange={onFilterChange}
-          openSignIn={openSignIn}
-          openMyAccount={openMyAccount}
-        />
-        {pageElement}
-      </UserContext.Provider>
-    </DbContext.Provider>
+    <>
+      <Header
+        isSignedIn={isSignedIn}
+        onFilterChange={() => {}}
+        openRegister={() => {}}
+        openMyAccount={() => {}}
+      />
+
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/register">
+              <AuthPage></AuthPage>;
+            </Route>
+            <Route path="/">
+              <Lobby filter={filter} openLecture={openLecture} />;
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
 }

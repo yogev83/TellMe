@@ -1,19 +1,19 @@
 import React from "react";
-import { UserContext } from "../context/userContext";
+import firebase from "firebase/app";
+import "firebase/auth";
 
-export function UserWelcome({ openSignIn, openMyAccount }) {
-  const userContext = React.useContext(UserContext);
+export function UserWelcome({ isSignedIn, openRegister, openMyAccount }) {
   return (
     <>
       {" "}
-      {userContext.user.username ? (
-        <div className="login">
+      {isSignedIn ? (
+        <div className="register">
           <div onClick={openMyAccount}>
-            <p>{userContext.user.username}</p>
+            <p>{firebase.auth().currentUser.displayName}</p>
           </div>
         </div>
       ) : (
-        <div className="login" onClick={openSignIn}>
+        <div className="register" onClick={openRegister}>
           Register
         </div>
       )}

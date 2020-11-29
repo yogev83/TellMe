@@ -4,7 +4,12 @@ import { goHome } from "../common/common";
 import { getQueryParam } from "../utils";
 import { UserWelcome } from "./userWelcome";
 
-export function Header({ onFilterChange, openSignIn, openMyAccount }) {
+export function Header({
+  isSignedIn,
+  onFilterChange,
+  openRegister,
+  openMyAccount,
+}) {
   return (
     <div className="header">
       <h1 className="logo clickable" onClick={goHome}>
@@ -16,7 +21,11 @@ export function Header({ onFilterChange, openSignIn, openMyAccount }) {
           <input className="searchLecture" onChange={onFilterChange} />
         </div>
       ) : null}
-      <UserWelcome openSignIn={openSignIn} openMyAccount={openMyAccount} />
+      <UserWelcome
+        isSignedIn={isSignedIn}
+        openRegister={openRegister}
+        openMyAccount={openMyAccount}
+      />
     </div>
   );
 }

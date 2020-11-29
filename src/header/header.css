@@ -1,27 +1,27 @@
 .header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    padding: 10px 30px;
-  }
-  
-  .header .logo,
-  .header .login {
-    color: #323fca;
-    font-family: "roboto";
-  }
-  
-  .header .logo {
-    font-weight: 500;
-    margin-right: 30px;
-  }
-  
-  .header .searchLecture {
-    margin-left: 10px;
-  }
-  
-  .header .login {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-  }
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 10px 30px;
+}
+
+.header .logo,
+.header .register {
+  color: #323fca;
+  font-family: "roboto";
+}
+
+.header .logo {
+  font-weight: 500;
+  margin-right: 30px;
+}
+
+.header .searchLecture {
+  margin-left: 10px;
+}
+
+.header .register {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}

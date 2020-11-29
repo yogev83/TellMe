@@ -1,11 +1,13 @@
 import React from "react";
-import { DbContext } from "../../../context/bdContext";
 import { Lecture } from "./lecture";
 import "./lectures.css";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 export function Lectures({ filter, openLecture }) {
   const [lecturesElements, setLecturesElements] = React.useState([]);
-  const db = React.useContext(DbContext);
+  const db = firebase.firestore();
 
   React.useEffect(() => {
     const fetchData = async () => {

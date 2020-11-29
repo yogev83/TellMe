@@ -1,5 +1,4 @@
 import React from "react";
-import { UserContext } from "../../context/userContext";
 import { fetchUserLectures } from "../../service";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -8,7 +7,6 @@ import "react-tabs/style/react-tabs.css";
 import "./myAccountPage.css";
 
 export function MyAccount() {
-  const { user } = React.useContext(UserContext);
   const [lectures, setLectures] = React.useState([]);
 
   const createLectureElement = React.useCallback(({ id, name, time }) => {
@@ -22,13 +20,13 @@ export function MyAccount() {
     );
   }, []);
 
-  React.useEffect(() => {
-    const fetchLectures = async () => {
-      let response = await fetchUserLectures(user.userId);
-      setLectures(response.lectures);
-    };
-    fetchLectures();
-  }, [user]);
+  // React.useEffect(() => {
+  //   const fetchLectures = async () => {
+  //     let response = await fetchUserLectures(user.userId);
+  //     setLectures(response.lectures);
+  //   };
+  //   fetchLectures();
+  // }, [user]);
 
   return (
     <div className="page myAccount-page">
@@ -40,7 +38,7 @@ export function MyAccount() {
 
         <TabPanel>
           <h2>My Account</h2>
-          <p>{user.username}</p>
+          {/* <p>{user.username}</p> */}
         </TabPanel>
         <TabPanel>
           <h2>My Lectures</h2>
