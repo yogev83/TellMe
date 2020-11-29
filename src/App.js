@@ -1,18 +1,16 @@
 import React from "react";
 import { Header } from "./header/header";
-import { LecturePage } from "./pages/lecture/lecturePage";
 import { Home } from "./pages/home/home";
-import { getQueryParam, setQueryParams } from "./utils";
-import "./styles.css";
 import { AuthPage } from "./pages/auth/authPage";
-import { fetchSessionData } from "./service";
 //import userEvent from "@testing-library/user-event";
 import { MyAccount } from "./pages/myAccount/myAccountPage";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 import "firebase/auth";
+
+import "./App.css";
 
 export default function App({ db }) {
   const [filter, setFilter] = React.useState([]);
@@ -41,17 +39,6 @@ export default function App({ db }) {
       />
 
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-        </nav>
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>

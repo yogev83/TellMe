@@ -13,6 +13,8 @@ import firebase from "firebase/app";
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 import "firebase/analytics";
 
+import "./index.css";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBsIsLqLOItfZp0nVRPfgry7df12-nwZPA",

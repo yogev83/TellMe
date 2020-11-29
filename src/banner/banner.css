@@ -21,3 +21,31 @@
   width: 18em;
   font-weight: normal;
 }
+
+nav.navigationBar {
+  position: absolute;
+  padding: 5px;
+  color: #ffffff;
+}
+
+nav.navigationBar ul {
+  padding: 0;
+}
+
+nav.navigationBar ul li {
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  padding: 5px;
+  font-weight: 600;
+}
+
+.navigationBar .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navigationBar a {
+  color: #ffffff;
+  text-decoration: initial;
+}
