@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "./header/header";
 import { LecturePage } from "./pages/lecture/lecturePage";
-import { Lobby } from "./pages/lobby/lobby";
+import { Home } from "./pages/home/home";
 import { getQueryParam, setQueryParams } from "./utils";
 import "./styles.css";
 import { AuthPage } from "./pages/auth/authPage";
@@ -40,31 +40,29 @@ export default function App({ db }) {
         openMyAccount={() => {}}
       />
 
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
-            </ul>
-          </nav>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </ul>
+        </nav>
 
-          {/* A <Switch> looks through its children <Route>s and
+        {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/register">
-              <AuthPage></AuthPage>;
-            </Route>
-            <Route path="/">
-              <Lobby filter={filter} openLecture={openLecture} />;
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+        <Switch>
+          <Route path="/register">
+            <AuthPage></AuthPage>;
+          </Route>
+          <Route path="/">
+            <Home filter={filter} openLecture={openLecture} />;
+          </Route>
+        </Switch>
+      </div>
     </>
   );
 }

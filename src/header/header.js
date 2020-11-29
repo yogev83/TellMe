@@ -1,31 +1,30 @@
 import React from "react";
 import "./header.css";
-import { goHome } from "../common/common";
-import { getQueryParam } from "../utils";
 import { UserWelcome } from "./userWelcome";
+import { useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-export function Header({
-  isSignedIn,
-  onFilterChange,
-  openRegister,
-  openMyAccount,
-}) {
+export function Header({ isSignedIn, onFilterChange }) {
+  const history = useHistory();
+  const match = useRouteMatch();
+
   return (
     <div className="header">
-      <h1 className="logo clickable" onClick={goHome}>
+      <h1
+        className="logo clickable"
+        onClick={() => {
+          history.push("/");
+        }}
+      >
         TellMe
       </h1>
-      {getQueryParam("page") === "lobby" ? (
+      {match === "/" ? (
         <div>
           What can we tell you about?
           <input className="searchLecture" onChange={onFilterChange} />
         </div>
       ) : null}
-      <UserWelcome
-        isSignedIn={isSignedIn}
-        openRegister={openRegister}
-        openMyAccount={openMyAccount}
-      />
+      <UserWelcome isSignedIn={isSignedIn} />
     </div>
   );
 }
