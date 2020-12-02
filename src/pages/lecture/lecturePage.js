@@ -1,19 +1,18 @@
 import React from "react";
 import { Banner } from "../../banner/banner";
-import { fetchLectureData } from "../../service";
 import "./lecturePage.css";
 import { Speaker } from "./speaker";
 
 export function LecturePage({ id }) {
   const [data, setData] = React.useState({});
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      let res = await fetchLectureData(id);
-      setData(res);
-    };
-    fetchData();
-  }, [id]);
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     let res = await fetchLectureData(id);
+  //     setData(res);
+  //   };
+  //   fetchData();
+  // }, [id]);
 
   return (
     <div className="page-lecture">

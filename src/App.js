@@ -9,12 +9,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 import "./App.css";
 
-export default function App({ db }) {
+export default function App() {
+  const db = firebase.firestore();
   const [filter, setFilter] = React.useState([]);
-  const [isSignedIn, setIsSignedIn] = React.useState(false);
+  const [userId, setUserId] = React.useState(null);
   // const onFilterChange = React.useCallback(
   //   (e) => {
   //     const values = e.target.value.split(",");
@@ -27,12 +29,33 @@ export default function App({ db }) {
     //setQueryParams({ page: "lecture", lecture: id });
   };
 
-  firebase.auth().onAuthStateChanged((user) => setIsSignedIn(!!user));
+  React.useEffect(() => {
+    if (userId) {
+      const fetchUserData = async () => {
+        const userData = await db
+          .collection("users")
+          .doc(userId)
+          .get()
+          .then((data) => {
+            console.warn("userdata", data);
+            return data;
+          });
+        console.warn(userData);
+      };
+      fetchUserData();
+    } else {
+      firebase
+        .auth()
+        .onAuthStateChanged((user) =>
+          setUserId(user ? user.getIdToken() : null)
+        );
+    }
+  }, [userId, db]);
 
   return (
     <>
       <Header
-        isSignedIn={isSignedIn}
+        isSignedIn={!!userId}
         onFilterChange={() => {}}
         openRegister={() => {}}
         openMyAccount={() => {}}

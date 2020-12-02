@@ -5,6 +5,7 @@ import "firebase/auth";
 
 export function UserWelcome({ isSignedIn }) {
   const history = useHistory();
+  console.warn("history", history);
   return (
     <>
       {" "}

@@ -1,5 +1,4 @@
 import React from "react";
-import { fetchUserLectures } from "../../service";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
