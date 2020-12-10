@@ -12,6 +12,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 import "./App.css";
+import { LecturePage } from "./pages/lecture/lecturePage";
 
 export default function App() {
   const db = firebase.firestore();
@@ -25,10 +26,6 @@ export default function App() {
   //   [setFilter]
   // );
 
-  const openLecture = (id) => {
-    //setQueryParams({ page: "lecture", lecture: id });
-  };
-
   React.useEffect(() => {
     if (userId) {
       const fetchUserData = async () => {
@@ -36,40 +33,49 @@ export default function App() {
           .collection("users")
           .doc(userId)
           .get()
-          .then((data) => {
-            console.warn("userdata", data);
-            return data;
+          .then((doc) => {
+            if (doc.exists) {
+              console.log("Document data:", doc.data());
+            } else {
+              db.collection("users").doc(userId).set({
+                speaker: false,
+              });
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting document:", error);
           });
-        console.warn(userData);
       };
       fetchUserData();
     } else {
       firebase
         .auth()
-        .onAuthStateChanged((user) =>
-          setUserId(user ? user.getIdToken() : null)
-        );
+        .onAuthStateChanged((user) => setUserId(user ? user.uid : null));
     }
   }, [userId, db]);
 
   return (
     <>
-      <Header
-        isSignedIn={!!userId}
-        onFilterChange={() => {}}
-        openRegister={() => {}}
-        openMyAccount={() => {}}
-      />
-
       <BrowserRouter>
+        <Header
+          onFilterChange={() => {}}
+          openAuth={() => {}}
+          openMyAccount={() => {}}
+        />
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/myAccount">
+            <MyAccount></MyAccount>
+          </Route>
           <Route path="/register">
             <AuthPage></AuthPage>;
           </Route>
+          <Route path="/lecture">
+            <LecturePage></LecturePage>;
+          </Route>
           <Route path="/">
-            <Home filter={filter} openLecture={openLecture} />;
+            <Home filter={filter} />;
           </Route>
         </Switch>
       </BrowserRouter>

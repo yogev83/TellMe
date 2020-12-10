@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import "./header.css";
 
-export function Header({ isSignedIn, onFilterChange }) {
+export function Header({ onFilterChange }) {
   const history = useHistory();
   // const match = useRouteMatch();
 
@@ -27,7 +27,7 @@ export function Header({ isSignedIn, onFilterChange }) {
           <input className="searchLecture" onChange={onFilterChange} />
         </div>
       ) : null}
-      <UserWelcome isSignedIn={isSignedIn} />
+      <UserWelcome />
     </div>
   );
 }

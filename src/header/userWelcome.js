@@ -3,13 +3,12 @@ import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-export function UserWelcome({ isSignedIn }) {
+export function UserWelcome() {
   const history = useHistory();
-  console.warn("history", history);
   return (
     <>
       {" "}
-      {isSignedIn ? (
+      {firebase.auth().currentUser ? (
         <div className="register">
           <div
             onClick={() => {

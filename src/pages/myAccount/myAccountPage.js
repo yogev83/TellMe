@@ -1,23 +1,15 @@
 import React from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 import "./myAccountPage.css";
+import { MyLecturesList } from "./myLecturesList";
 
 export function MyAccount() {
   const [lectures, setLectures] = React.useState([]);
-
-  const createLectureElement = React.useCallback(({ id, name, time }) => {
-    return (
-      <div key={id}>
-        <span className="lectureDetails">
-          <p>{name}</p>
-          <p>{time}</p>
-        </span>
-      </div>
-    );
-  }, []);
 
   // React.useEffect(() => {
   //   const fetchLectures = async () => {
@@ -37,11 +29,11 @@ export function MyAccount() {
 
         <TabPanel>
           <h2>My Account</h2>
-          {/* <p>{user.username}</p> */}
+          {firebase.auth().currentUser.displayName}
         </TabPanel>
         <TabPanel>
           <h2>My Lectures</h2>
-          {lectures.map((lecture) => createLectureElement(lecture))}
+          <MyLecturesList lectures={[{ name: "js", time: "12:33" }]} />
         </TabPanel>
       </Tabs>
     </div>

@@ -4,10 +4,16 @@ import "./lectures.css";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { useHistory } from "react-router";
 
-export function Lectures({ filter, openLecture }) {
+export function Lectures({ filter }) {
   const [lecturesElements, setLecturesElements] = React.useState([]);
   const db = firebase.firestore();
+  const history = useHistory();
+
+  const openLecture = React.useCallback(() => {
+    history.push("/lecture");
+  }, [history]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +36,7 @@ export function Lectures({ filter, openLecture }) {
       );
     };
     fetchData();
-  }, [filter, openLecture, db]);
+  }, [filter, db]);
 
   return <div className="lecturesContainer">{lecturesElements}</div>;
 }
